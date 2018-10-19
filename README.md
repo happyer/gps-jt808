@@ -3,7 +3,8 @@
 
 # jt-808-protocol
 
-
+#备注
+启动类 com.chauncy.jt808.App
 
 # 测试数据
 
