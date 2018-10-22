@@ -1,5 +1,6 @@
 package com.chauncy.test;
 
+import com.chauncy.jt808.util.BitUtils;
 import com.chauncy.jt808.util.StringUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -41,7 +42,7 @@ public class KMClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
         //batch location
         for (int i = 0; i < 10; i++) {
-            ctx.writeAndFlush(StringUtils.getByteBuf(batchLocation));
+            ctx.writeAndFlush(getDate(tcpData));
         }
 
 
@@ -50,6 +51,14 @@ public class KMClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
         HeartHelper.add(ctx.channel());
 
 
+    }
+
+    public static ByteBuf getDate(String data) {
+        ByteBuf byteBuf = Unpooled.buffer();
+        for (String s : data.split(" ")) {
+            byteBuf.writeByte(BitUtils.hexStringToByteArray(s)[0]);
+        }
+        return byteBuf;
     }
 
     @Override

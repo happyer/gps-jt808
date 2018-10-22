@@ -1,5 +1,6 @@
 package com.chauncy.jt808.service.handler;
 
+import com.alibaba.fastjson.JSON;
 import com.chauncy.jt808.vo.req.LocationInfoUploadMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -124,7 +125,7 @@ public class TCPServerHandler extends ChannelInboundHandlerAdapter { // (1)
 				LocationInfoUploadMsg locationInfoUploadMsg = this.decoder.toLocationInfoUploadMsg(packageData);
 				System.out.println(locationInfoUploadMsg);
 				this.msgProcessService.processLocationInfoUploadMsg(locationInfoUploadMsg);
-				logger.info("<<<<<[位置信息],phone={},flowid={}", header.getTerminalPhone(), header.getFlowId());
+				logger.info("<<<<<[位置信息],data={}", JSON.toJSONString(locationInfoUploadMsg) );
 			} catch (Exception e) {
 				logger.error("<<<<<[位置信息]处理错误,phone={},flowid={},err={}", header.getTerminalPhone(), header.getFlowId(),
 						e.getMessage());

@@ -33,6 +33,36 @@ public class LocationInfoUploadMsg extends PackageData {
 	// GMT+8 时间，本标准中之后涉及的时间均采用此时区
 	private Date time;
 
+	private long mileage;
+
+	private int fuel;
+
+	private int recorderSpeed;
+
+	public int getRecorderSpeed() {
+		return recorderSpeed;
+	}
+
+	public void setRecorderSpeed(int recorderSpeed) {
+		this.recorderSpeed = recorderSpeed;
+	}
+
+	public int getFuel() {
+		return fuel;
+	}
+
+	public void setFuel(int fuel) {
+		this.fuel = fuel;
+	}
+
+	public long getMileage() {
+		return mileage;
+	}
+
+	public void setMileage(long mileage) {
+		this.mileage = mileage;
+	}
+
 	public LocationInfoUploadMsg() {
 	}
 

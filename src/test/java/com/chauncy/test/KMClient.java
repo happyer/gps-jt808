@@ -52,6 +52,21 @@ public class KMClient {
     private static String heartData = "7E 00 02 00 00 01 86 57 11 59 29 00 01 69 7E";
 
 
+    private static String tcpData = "7E 02 00 00 22 01 44 00 44 00 55 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 18 05 30 17 31 36 25 04 00 00 00 00 69 7E";
+
+
+    private static String batchLocation = "7e0704012f0145314385390024000501003a000001000000080001cd7d01c207278128000000000002180606094227010400000000eb16000c00b28986040419179068187500060089ffffffff003a000001000000080101cd7d01c207278128000000000002180606094232010400000000eb16000c00b28986040419179068187500060089ffffffff003a000001000000080101cd7d01c207278128000000000000180606094258010400000000eb16000c00b28986040419179068187500060089ffffffff003a000001000000080001cd7d01c207278128000000000006180606094812010400000000eb16000c00b28986040419179068187500060089ffffffff003a000001000000080001cd7d01c207278128000000000006180606094828010400000000eb16000c00b28986040419179068187500060089ffffffff377e";
+
+
+    public static ByteBuf getDate() {
+        ByteBuf byteBuf = Unpooled.buffer();
+        for (String s : tcpData.split(" ")) {
+            byteBuf.writeByte(BitUtils.hexStringToByteArray(s)[0]);
+        }
+        return byteBuf;
+    }
+
+
     public static ByteBuf getHeart() {
         ByteBuf byteBuf = Unpooled.buffer();
         for (String s : heartData.split(" ")) {
@@ -66,12 +81,12 @@ public class KMClient {
         int port = 6688;
         KMClient kmClient = new KMClient(host, port);
 
-        Executors.newScheduledThreadPool(1).scheduleAtFixedRate(() -> {
-            HeartHelper.getChannels().forEach(channel -> {
-                channel.writeAndFlush(getHeart());
-                System.out.println("start send heart");
-            });
-        }, 0, 1, TimeUnit.SECONDS);
+//        Executors.newScheduledThreadPool(1).scheduleAtFixedRate(() -> {
+//            HeartHelper.getChannels().forEach(channel -> {
+//                channel.writeAndFlush(getDate());
+//                System.out.println("start send heart");
+//            });
+//        }, 0, 1, TimeUnit.SECONDS);
         kmClient.start();
 
 
